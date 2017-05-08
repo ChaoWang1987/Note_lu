@@ -1,0 +1,23 @@
+
+//在此文件夹里初始化
+git init
+
+//第一次需要把远程仓库的项目clone到本文件夹（第二次以后用pull更新同步）
+git clone https://github.com/jianlilu/thooo.git
+
+
+//将需要提交的文件添加到列表
+git add README.md   或  git add .
+
+//本地提交
+git commit -m "first commit"
+
+//本地与远程仓库建立连接
+git remote add origin https://github.com/jianlilu/thooo.git
+
+//push 到远程仓库
+git push -u origin master
+
+
+//拉取（当远程仓库和本地不一致时，先pull,再add,commit,push）
+git pull origin master
