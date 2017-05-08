@@ -67,8 +67,29 @@ $ git reset --hard HEAD^
 //（回到$ git reset --hard HEAD^之前的版本）（3628164是版本号，在GitHub中history里找到）
 $ git reset --hard 3628164
 
+
+//修改后还没有被放到暂存区
 //git checkout -- file可以丢弃工作区的修改
 $ git checkout -- readme.txt
+
+
+//已经git add到暂存区,庆幸的是，在commit之前，你发现了这个问题。
+//用git status查看一下，修改只是添加到了暂存区，还没有提交：
+//1、$ git reset head hello.txt (把暂存区的修改撤销掉（unstage），重新放回工作区)
+$ git status
+(use "git reset HEAD <file>..." to unstage)
+$ git reset head hello.txt
+
+
+//2、$ git checkout -- hello.txt（丢弃工作区的修改）
+$ git status
+(use "git checkout -- <file>..." to discard changes in working directory)
+$ git checkout -- hello.txt
+
+
+//rm命令删除文件
+$ rm test.txt
+
 
 
 
@@ -133,21 +154,36 @@ git add命令实际上就是把要提交的所有修改放到暂存区（Stage），然后，执行git commit
 检出命令git checkout是git最常用的命令之一，同时也是一个很危险的命令，因为这条命令会重写工作区。
 
 
+现在假定是凌晨3点，你不但写了一些胡话，还git add到暂存区了,
+庆幸的是，在commit之前，你发现了这个问题。用git status查看一下，修改只是添加到了暂存区，还没有提交,
+Git同样告诉我们，用命令git reset HEAD file可以把暂存区的修改撤销掉（unstage），重新放回工作区.
+$ git reset HEAD readme.txt
+git reset命令既可以回退版本，也可以把暂存区的修改回退到工作区。当我们用HEAD时，表示最新的版本.
+再用git status查看一下，现在暂存区是干净的，工作区有修改：
+还记得如何丢弃工作区的修改吗？
+$ git checkout -- readme.txt
+
+
+ 现在，假设你不但改错了东西，还从暂存区提交到了版本库，怎么办呢？还记得版本回退一节吗？
+可以回退到上一个版本。不过，这是有条件的，就是你还没有把自己的本地版本库推送到远程。
+还记得Git是分布式版本控制系统吗？我们后面会讲到远程版本库，一旦你把“stupid boss”提交推送到远程版本库，你就真的惨了…
+
+
+场景1：当你改乱了工作区某个文件的内容，想直接丢弃工作区的修改时，用命令git checkout -- file。
+
+场景2：当你不但改乱了工作区某个文件的内容，还添加到了暂存区时，想丢弃修改，分两步，第一步用命令git reset HEAD file，就回到了场景1，第二步按场景1操作。
+
+场景3：已经提交了不合适的修改到版本库时，想要撤销本次提交，参考版本回退一节，不过前提是没有推送到远程库。
 
 
 
+一般情况下，你通常直接在文件管理器中把没用的文件删了，或者用rm命令删了：
+$ rm test.txt
+这个时候，Git知道你删除了文件，因此，工作区和版本库就不一致了，git status命令会立刻告诉你哪些文件被删除了;
+现在你有两个选择，一是确实要从版本库中删除该文件，那就用命令git rm删掉，并且git commit：
 
-
-
-
-
-
-
-
-
-
-
-
+$ git rm test.txt
+$ git commit -m "remove test.txt"
 
 
 
