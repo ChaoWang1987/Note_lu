@@ -87,10 +87,14 @@ $ git status
 $ git checkout -- hello.txt
 
 
-//rm命令删除文件
-$ rm test.txt
+//1、rm命令删除文件
+$ git rm test.txt
 
+//2、
+$ git commit -m "remove test.txt"
 
+//3、push后工作区和版本库就一致了
+$ git push origin master
 
 
 
