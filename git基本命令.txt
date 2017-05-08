@@ -67,8 +67,8 @@ $ git reset --hard HEAD^
 //（回到$ git reset --hard HEAD^之前的版本）（3628164是版本号，在GitHub中history里找到）
 $ git reset --hard 3628164
 
-
-
+//git checkout -- file可以丢弃工作区的修改
+$ git checkout -- readme.txt
 
 
 
@@ -103,6 +103,62 @@ $ git reset --hard 3628164
 HEAD指向的版本就是当前版本，因此，Git允许我们在版本的历史之间穿梭，使用命令git reset --hard commit_id。
 穿梭前，用git log可以查看提交历史，以便确定要回退到哪个版本。
 要重返未来，用git reflog查看命令历史，以便确定要回到未来的哪个版本。
+
+
+工作区（Working Directory）
+就是你在电脑里能看到的目录，比如我的note文件夹就是一个工作区：
+
+版本库（Repository）
+工作区有一个隐藏目录.git，这个不算工作区，而是Git的版本库。
+
+Git的版本库里存了很多东西，其中最重要的就是称为stage（或者叫index）的暂存区，还有Git为我们自动创建的第一个分支master，以及指向master的一个指针叫HEAD。
+
+
+git add命令实际上就是把要提交的所有修改放到暂存区（Stage），然后，执行git commit就可以一次性把暂存区的所有修改提交到分支。
+一旦提交后，如果你又没有对工作区做任何修改，那么工作区就是“干净”的;
+现在版本库变成了这样，暂存区就没有任何内容了;
+
+为什么Git比其他版本控制系统设计得优秀，因为Git跟踪并管理的是修改，而非文件。
+
+现在，你又理解了Git是如何跟踪修改的，每次修改，如果不add到暂存区，那就不会加入到commit中。
+
+
+命令git checkout -- readme.txt意思就是，把readme.txt文件在工作区的修改全部撤销，这里有两种情况：
+
+一种是readme.txt自修改后还没有被放到暂存区，现在，撤销修改就回到和版本库一模一样的状态；
+
+一种是readme.txt已经添加到暂存区后，又作了修改，现在，撤销修改就回到添加到暂存区后的状态。
+
+总之，就是让这个文件回到最近一次git commit或git add时的状态。
+检出命令git checkout是git最常用的命令之一，同时也是一个很危险的命令，因为这条命令会重写工作区。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 */
 	
