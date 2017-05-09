@@ -186,7 +186,15 @@ $ git tag -d v0.9
 //然后，从远程删除。删除命令也是push，但是格式如下：
 $ git push origin :refs/tags/v0.9
 
+//配置别名,以后st就表示status
+$ git config --global alias.st status
 
+//当然还有别的命令可以简写，很多人都用co表示checkout，ci表示commit，br表示branch：
+$ git config --global alias.co checkout
+$ git config --global alias.ci commit
+$ git config --global alias.br branch
+
+//--global参数是全局参数，也就是这些命令在这台电脑的所有Git仓库下都有用。
 
 
 
@@ -351,7 +359,41 @@ git tag -s <tagname> -m "blablabla..."可以用PGP签名标签；
 	
 
 
+分支管理
 
+主分支:	master
+
+创建分支
+$ git checkout -b <name>
+	-b 创建并切换分支等于一下两条命令
+		$ git branch <name>		创建分支<name>
+		$ git checkout <name>	切换到<name>分支
+
+查看分支
+$ git branch
+
+合并指定分支到当前分支
+$ git merge <name>
+	--no-ff		用普通模式合并，产生一个新的 merge commit.
+				默认使用 Fast forward 模式没有 merge commit.
+
+删除分支
+$ git branch -d <name>
+	-d	删除合并后的分支
+	-D	强制删除分支
+
+暂存当前正在进行的工作
+$ git stash
+
+查看已暂存的工作
+$ git stash list
+
+恢复暂存的工作同时把暂存内容删除
+$ git stash pop
+	恢复暂存的工作
+	$ git stash apply stash@{0}
+	将暂存内容删除
+	$ git stash drop stash@{0}
 
 
 
