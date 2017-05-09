@@ -196,6 +196,8 @@ $ git config --global alias.br branch
 
 //--global参数是全局参数，也就是这些命令在这台电脑的所有Git仓库下都有用。
 
+//甚至还有人丧心病狂地把lg配置成了：
+git config --global alias.lg "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
 
 
 
