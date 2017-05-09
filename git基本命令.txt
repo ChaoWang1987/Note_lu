@@ -1,187 +1,189 @@
 
-//�ڴ��ļ������ʼ��
+//在此文件夹里初始化
 git init
 
-//��һ����Ҫ��Զ�ֿ̲����Ŀclone�����ļ��У��ڶ����Ժ���pull����ͬ����
+//第一次需要把远程仓库的项目clone到本文件夹（第二次以后用pull更新同步）
 git clone https://github.com/jianlilu/thooo.git
 
-//����Ҫ�ύ���ļ����ӵ��ֿ�
-git add README.md   ��  git add .
+//将需要提交的文件添加到仓库
+git add README.md   或  git add .
 
-//���ļ��ύ���ֿ⣨���أ�
+//把文件提交到仓库（本地）
 git commit -m "first commit"
 
-//������Զ�ֿ̲⽨������
+//本地与远程仓库建立连接
 git remote add origin https://github.com/jianlilu/thooo.git
 
-//push ��Զ�ֿ̲�
+//push 到远程仓库
 git push -u origin master
 
-//��ȡ����Զ�ֿ̲�ͱ��ز�һ��ʱ����pull,��add,commit,push��
+//拉取（当远程仓库和本地不一致时，先pull,再add,commit,push）
 git pull origin master
 
 
-//��װ��ɺ󣬻���Ҫ���һ�����ã������������룺
+//安装完成后，还需要最后一步设置，在命令行输入：
 
 $ git config --global user.name "Your Name"
 $ git config --global user.email "email@example.com"
-//��ΪGit�Ƿֲ�ʽ�汾����ϵͳ�����ԣ�ÿ�������������Ա����ţ�������ֺ�Email��ַ����Ҳ���ᵣ��//��������˹���ð�������ô�죿������ص��ģ������������Ŵ�Ҷ���������֪��Ⱥ�ڣ���Σ������//ð���Ҳ���а취�ɲ�ġ�
+//因为Git是分布式版本控制系统，所以，每个机器都必须自报家门：你的名字和Email地址。你也许会担心//，如果有人故意冒充别人怎么办？这个不必担心，
+//首先我们相信大家都是善良无知的群众，其次，真的有//冒充的也是有办法可查的。
 
-//ע��git config�����--global���������������������ʾ����̨���������е�Git�ֿⶼ��ʹ���������//����ȻҲ���Զ�ĳ���ֿ�ָ����ͬ���û�����Email��ַ
+//注意git config命令的--global参数，用了这个参数，表示你这台机器上所有的Git仓库都会使用这个配置//，当然也可以对某个仓库
+//指定不同的用户名和Email地址
 
-//����hello�ļ���
+//创建hello文件夹
 $ mkdir hello
 
-//����hello�ļ���
+//进入hello文件夹
 $ cd hello
 
-//������ʾ��ǰĿ¼
+//用于显示当前目录
 $ pwd
 	/c/Users/w/Desktop/note/hello
 
-//ͨ��git init��������Ŀ¼���Git���Թ����Ĳֿ⣺
+//通过git init命令把这个目录变成Git可以管理的仓库：
 $ git init	
 	
-//�г����ļ����������ļ�
+//列出此文件夹里所有文件
 $ ls -ah
 
-//������ʱ�����ղֿ⵱ǰ��״̬
+//让我们时刻掌握仓库当前的状态
 $ git status
 
 
-//git diff����˼����ǲ鿴difference����ʾ�ĸ�ʽ����Unixͨ�õ�diff��ʽ
+//git diff顾名思义就是查看difference，显示的格式正是Unix通用的diff格式
 $ git diff
 
-//git log������ʾ���������Զ���ύ��־
+//git log命令显示从最近到最远的提交日志
 $ git log
 
-//����������Ϣ̫�࣬�����ۻ����ҵģ��������Լ���--pretty=oneline����
+//如果嫌输出信息太多，看得眼花缭乱的，可以试试加上--pretty=oneline参数
 $ git log --pretty=oneline
 
-//git reflog�鿴������ʷ���Ա�ȷ��Ҫ�ص�δ�����ĸ��汾��
+//git reflog查看命令历史，以便确定要回到未来的哪个版本。
 $ git reflog
 
-//���˵����ϸ��汾
+//回退到了上个版本
 $ git reset --hard HEAD^
 
-//���ص�$ git reset --hard HEAD^֮ǰ�İ汾����3628164�ǰ汾�ţ���GitHub��history���ҵ���
+//（回到$ git reset --hard HEAD^之前的版本）（3628164是版本号，在GitHub中history里找到）
 $ git reset --hard 3628164
 
 
-//�޸ĺ�û�б��ŵ��ݴ���
-//git checkout -- file���Զ������������޸�
+//修改后还没有被放到暂存区
+//git checkout -- file可以丢弃工作区的修改
 $ git checkout -- readme.txt
 
 
-//�Ѿ�git add���ݴ���,���ҵ��ǣ���commit֮ǰ���㷢����������⡣
-//��git status�鿴һ�£��޸�ֻ�����ӵ����ݴ�������û���ύ��
-//1��$ git reset head hello.txt (���ݴ������޸ĳ�������unstage�������·Żع�����)
+//已经git add到暂存区,庆幸的是，在commit之前，你发现了这个问题。
+//用git status查看一下，修改只是添加到了暂存区，还没有提交：
+//1、$ git reset head hello.txt (把暂存区的修改撤销掉（unstage），重新放回工作区)
 $ git status
 (use "git reset HEAD <file>..." to unstage)
 $ git reset head hello.txt
 
 
-//2��$ git checkout -- hello.txt���������������޸ģ�
+//2、$ git checkout -- hello.txt（丢弃工作区的修改）
 $ git status
 (use "git checkout -- <file>..." to discard changes in working directory)
 $ git checkout -- hello.txt
 
 
-//1��rm����ɾ���ļ�
+//1、rm命令删除文件
 $ git rm test.txt
 
-//2��
+//2、
 $ git commit -m "remove test.txt"
 
-//3��push�������Ͱ汾���һ����
+//3、push后工作区和版本库就一致了
 $ git push origin master
 
-//����dev��֧��Ȼ���л���dev��֧��
+//创建dev分支，然后切换到dev分支：
 $ git checkout -b dev
 
-//git checkout�������-b������ʾ�������л����൱��������������
+//git checkout命令加上-b参数表示创建并切换，相当于以下两条命令
 $ git branch dev
 $ git checkout dev
 Switched to branch 'dev'
 
-//��git branch����鿴��ǰ��֧(git branch������г����з�֧����ǰ��֧ǰ����һ��*��)
+//用git branch命令查看当前分支(git branch命令会列出所有分支，当前分支前面会标一个*号)
 $ git branch
 * dev
   master
   
   
-//dev��֧�Ĺ�����ɣ����ǾͿ����л���master��֧��  
+//dev分支的工作完成，我们就可以切换回master分支：  
 $ git checkout master
 Switched to branch 'master'
 
-//�л���master��֧���ٲ鿴һ��readme.txt�ļ����ղ����ӵ����ݲ����ˣ���Ϊ�Ǹ��ύ����dev��֧�ϣ�
-//��master��֧�˿̵��ύ�㲢û�б䣺
-//���ڣ����ǰ�dev��֧�Ĺ����ɹ��ϲ���master��֧�ϣ�
-//git merge�������ںϲ�ָ����֧����ǰ��֧��
+//切换回master分支后，再查看一个readme.txt文件，刚才添加的内容不见了！因为那个提交是在dev分支上，
+//而master分支此刻的提交点并没有变：
+//现在，我们把dev分支的工作成果合并到master分支上：
+//git merge命令用于合并指定分支到当前分支。
 $ git merge dev
 
-//�ϲ���ɺ󣬾Ϳ��Է��ĵ�ɾ��dev��֧�ˣ�
+//合并完成后，就可以放心地删除dev分支了：
 $ git branch -d dev
 Deleted branch dev (was fec145a).
 
-//ɾ���󣬲鿴branch����ֻʣ��master��֧�ˣ�
+//删除后，查看branch，就只剩下master分支了：
 $ git branch
 * master
 
-//��Ϊ�������ϲ���ɾ����֧�ǳ��죬����Git������ʹ�÷�֧���ĳ�����񣬺ϲ�����ɾ����֧��
-//���ֱ����master��֧�Ϲ���Ч����һ���ģ������̸���ȫ��
+//因为创建、合并和删除分支非常快，所以Git鼓励你使用分支完成某个任务，合并后再删掉分支，
+//这和直接在master分支上工作效果是一样的，但过程更安全。
 
-//Git��������ʹ�÷�֧��
+//Git鼓励大量使用分支：
 
-�鿴��֧��git branch
+查看分支：git branch
 
-������֧��git branch <name>
+创建分支：git branch <name>
 
-�л���֧��git checkout <name>
+切换分支：git checkout <name>
 
-����+�л���֧��git checkout -b <name>
+创建+切换分支：git checkout -b <name>
 
-�ϲ�ĳ��֧����ǰ��֧��git merge <name>
+合并某分支到当前分支：git merge <name>
 
-ɾ����֧��git branch -d <name>
+删除分支：git branch -d <name>
 
-��git log --graph������Կ�����֧�ϲ�ͼ
+用git log --graph命令可以看到分支合并图
 
-//��git remote -v��ʾ����ϸ��Զ�̿����Ϣ
+//用git remote -v显示更详细的远程库的信息
 $ git remote -v
 
-//������git tag <name>�Ϳ��Դ�һ���±�ǩ��
+//敲命令git tag <name>就可以打一个新标签：
 $ git tag v1.0
 
-//������git tag�鿴���б�ǩ��
+//用命令git tag查看所有标签：
 $ git tag
 
-//Ҫ��add merge����ύ���ǩ������Ӧ��commit id��6224937����������
+//要对add merge这次提交打标签，它对应的commit id是6224937，敲入命令
 $ git tag v0.9 6224937
 
-//��git show <tagname>�鿴��ǩ��Ϣ
+//用git show <tagname>查看标签信息
 $ git show v0.9
 
-//�����Դ�������˵���ı�ǩ����-aָ����ǩ����-mָ��˵�����֣�
+//还可以创建带有说明的标签，用-a指定标签名，-m指定说明文字：
 $ git tag -a v0.1 -m "version 0.1 released" 3628164
 
-//������git show <tagname>���Կ���˵�����֣�
+//用命令git show <tagname>可以看到说明文字：
 $ git show v0.1
 
-//�����ǩ����ˣ�Ҳ����ɾ����
+//如果标签打错了，也可以删除：
 $ git tag -d v0.1
 
-//��Ϊ�����ı�ǩ��ֻ�洢�ڱ��أ������Զ����͵�Զ�̡����ԣ�����ı�ǩ�����ڱ��ذ�ȫɾ����
-//���Ҫ����ĳ����ǩ��Զ�̣�ʹ������git push origin <tagname>��
+//因为创建的标签都只存储在本地，不会自动推送到远程。所以，打错的标签可以在本地安全删除。
+//如果要推送某个标签到远程，使用命令git push origin <tagname>：
 $ git push origin v1.0
 
-//���ߣ�һ��������ȫ����δ���͵�Զ�̵ı��ر�ǩ��
+//或者，一次性推送全部尚未推送到远程的本地标签：
 $ git push origin --tags
 
-//�����ǩ�Ѿ����͵�Զ�̣�Ҫɾ��Զ�̱�ǩ���鷳һ�㣬�ȴӱ���ɾ����
+//如果标签已经推送到远程，要删除远程标签就麻烦一点，先从本地删除：
 $ git tag -d v0.9
 
-//Ȼ�󣬴�Զ��ɾ����ɾ������Ҳ��push�����Ǹ�ʽ���£�
+//然后，从远程删除。删除命令也是push，但是格式如下：
 $ git push origin :refs/tags/v0.9
 
 
@@ -191,100 +193,103 @@ $ git push origin :refs/tags/v0.9
 
 
 /*
-������������ȷһ�£����еİ汾����ϵͳ����ʵֻ�ܸ����ı��ļ��ĸĶ�������TXT�ļ�����ҳ�����еĳ������ȵȣ�GitҲ�����⡣�汾����ϵͳ���Ը�����ÿ�εĸĶ��������ڵ�5�м���һ�����ʡ�Linux�����ڵ�8��ɾ��һ�����ʡ�Windows������ͼƬ����Ƶ��Щ�������ļ�����ȻҲ���ɰ汾����ϵͳ��������û�������ļ��ı仯��ֻ�ܰѶ������ļ�ÿ�θĶ���������Ҳ����ֻ֪��ͼƬ��100KB�ĳ���120KB�������׸���ɶ���汾����ϵͳ��֪����Ҳû��֪����
+首先这里再明确一下，所有的版本控制系统，其实只能跟踪文本文件的改动，比如TXT文件，网页，所有的程序代码等等，Git也不例外。版本控制系统可以告诉你每次的改动，比如在第5行加了一个单词“Linux”，在第8行删了一个单词“Windows”。而图片、视频这些二进制文件，虽然也能由版本控制系统管理，
+但没法跟踪文件的变化，只能把二进制文件每次改动串起来，也就是只知道图片从100KB改成了120KB，但到底改了啥，版本控制系统不知道，也没法知道。
 
-���ҵ��ǣ�Microsoft��Word��ʽ�Ƕ����Ƹ�ʽ����ˣ��汾����ϵͳ��û������Word�ļ��ĸĶ���
+不幸的是，Microsoft的Word格式是二进制格式，因此，版本控制系统是没法跟踪Word文件的改动的
 
-ִ����������û���κ���ʾ����Ͷ��ˣ�Unix����ѧ�ǡ�û����Ϣ���Ǻ���Ϣ����˵�����ӳɹ���
+执行上面的命令，没有任何显示，这就对了，Unix的哲学是“没有消息就是好消息”，说明添加成功。
 
-ΪʲôGit�����ļ���Ҫadd��commitһ�������أ���Ϊcommit����һ���ύ�ܶ��ļ�����������Զ��add��ͬ���ļ�
-
-
-Ҫ��ʱ���չ�������״̬��ʹ��git status���
-���git status���������ļ����޸Ĺ�����git diff���Բ鿴�޸����ݡ�
+为什么Git添加文件需要add，commit一共两步呢？因为commit可以一次提交很多文件，所以你可以多次add不同的文件
 
 
-��Ȼ�ˣ���ʵ�ʹ����У�������������ô���ܼǵ�һ����ǧ�е��ļ�ÿ�ζ�����ʲô���ݣ���ȻҪ�汾����ϵͳ��ʲô���汾����ϵͳ�϶���ĳ��������Ը���������ʷ��¼����Git�У�������git log����鿴;
+要随时掌握工作区的状态，使用git status命令。
+如果git status告诉你有文件被修改过，用git diff可以查看修改内容。
 
 
-���ȣ�Git����֪����ǰ�汾���ĸ��汾����Git�У���HEAD��ʾ��ǰ�汾��Ҳ�������µ��ύ3628164...882e1e0��ע���ҵ��ύID����Ŀ϶���һ��������һ���汾����HEAD^������һ���汾����HEAD^^����Ȼ����100���汾д100��^�Ƚ�������������������д��HEAD~100
+当然了，在实际工作中，我们脑子里怎么可能记得一个几千行的文件每次都改了什么内容，不然要版本控制系统干什么。版本控制系统肯定有某个命令
+可以告诉我们历史记录，在Git中，我们用git log命令查看;
 
 
-HEADָ��İ汾���ǵ�ǰ�汾����ˣ�Git���������ڰ汾����ʷ֮�䴩��ʹ������git reset --hard commit_id��
-����ǰ����git log���Բ鿴�ύ��ʷ���Ա�ȷ��Ҫ���˵��ĸ��汾��
-Ҫ�ط�δ������git reflog�鿴������ʷ���Ա�ȷ��Ҫ�ص�δ�����ĸ��汾��
+首先，Git必须知道当前版本是哪个版本，在Git中，用HEAD表示当前版本，也就是最新的提交3628164...882e1e0（注意我的提交ID和你的肯定不一样），
+上一个版本就是HEAD^，上上一个版本就是HEAD^^，当然往上100个版本写100个^比较容易数不过来，所以写成HEAD~100
 
 
-��������Working Directory��
-�������ڵ������ܿ�����Ŀ¼�������ҵ�note�ļ��о���һ����������
-
-�汾�⣨Repository��
-��������һ������Ŀ¼.git��������㹤����������Git�İ汾�⡣
-
-Git�İ汾������˺ܶණ������������Ҫ�ľ��ǳ�Ϊstage�����߽�index�����ݴ���������GitΪ�����Զ������ĵ�һ����֧master���Լ�ָ��master��һ��ָ���HEAD��
+HEAD指向的版本就是当前版本，因此，Git允许我们在版本的历史之间穿梭，使用命令git reset --hard commit_id。
+穿梭前，用git log可以查看提交历史，以便确定要回退到哪个版本。
+要重返未来，用git reflog查看命令历史，以便确定要回到未来的哪个版本。
 
 
-git add����ʵ���Ͼ��ǰ�Ҫ�ύ�������޸ķŵ��ݴ�����Stage����Ȼ��ִ��git commit�Ϳ���һ���԰��ݴ����������޸��ύ����֧��
-һ���ύ���������û�жԹ��������κ��޸ģ���ô���������ǡ��ɾ�����;
-���ڰ汾�������������ݴ�����û���κ�������;
+工作区（Working Directory）
+就是你在电脑里能看到的目录，比如我的note文件夹就是一个工作区：
 
-ΪʲôGit�������汾����ϵͳ��Ƶ����㣬��ΪGit���ٲ����������޸ģ������ļ���
+版本库（Repository）
+工作区有一个隐藏目录.git，这个不算工作区，而是Git的版本库。
 
-���ڣ�����������Git����θ����޸ĵģ�ÿ���޸ģ������add���ݴ������ǾͲ�����뵽commit�С�
-
-
-����git checkout -- readme.txt��˼���ǣ���readme.txt�ļ��ڹ��������޸�ȫ�����������������������
-
-һ����readme.txt���޸ĺ�û�б��ŵ��ݴ��������ڣ������޸ľͻص��Ͱ汾��һģһ����״̬��
-
-һ����readme.txt�Ѿ����ӵ��ݴ������������޸ģ����ڣ������޸ľͻص����ӵ��ݴ������״̬��
-
-��֮������������ļ��ص����һ��git commit��git addʱ��״̬��
-�������git checkout��git��õ�����֮һ��ͬʱҲ��һ����Σ�յ������Ϊ�����������д��������
+Git的版本库里存了很多东西，其中最重要的就是称为stage（或者叫index）的暂存区，还有Git为我们自动创建的第一个分支master，以及指向master的一个指针叫HEAD。
 
 
-���ڼٶ����賿3�㣬�㲻��д��һЩ��������git add���ݴ�����,
-���ҵ��ǣ���commit֮ǰ���㷢����������⡣��git status�鿴һ�£��޸�ֻ�����ӵ����ݴ�������û���ύ,
-Gitͬ���������ǣ�������git reset HEAD file���԰��ݴ������޸ĳ�������unstage�������·Żع�����.
+git add命令实际上就是把要提交的所有修改放到暂存区（Stage），然后，执行git commit就可以一次性把暂存区的所有修改提交到分支。
+一旦提交后，如果你又没有对工作区做任何修改，那么工作区就是“干净”的;
+现在版本库变成了这样，暂存区就没有任何内容了;
+
+为什么Git比其他版本控制系统设计得优秀，因为Git跟踪并管理的是修改，而非文件。
+
+现在，你又理解了Git是如何跟踪修改的，每次修改，如果不add到暂存区，那就不会加入到commit中。
+
+
+命令git checkout -- readme.txt意思就是，把readme.txt文件在工作区的修改全部撤销，这里有两种情况：
+
+一种是readme.txt自修改后还没有被放到暂存区，现在，撤销修改就回到和版本库一模一样的状态；
+
+一种是readme.txt已经添加到暂存区后，又作了修改，现在，撤销修改就回到添加到暂存区后的状态。
+
+总之，就是让这个文件回到最近一次git commit或git add时的状态。
+检出命令git checkout是git最常用的命令之一，同时也是一个很危险的命令，因为这条命令会重写工作区。
+
+
+现在假定是凌晨3点，你不但写了一些胡话，还git add到暂存区了,
+庆幸的是，在commit之前，你发现了这个问题。用git status查看一下，修改只是添加到了暂存区，还没有提交,
+Git同样告诉我们，用命令git reset HEAD file可以把暂存区的修改撤销掉（unstage），重新放回工作区.
 $ git reset HEAD readme.txt
-git reset����ȿ��Ի��˰汾��Ҳ���԰��ݴ������޸Ļ��˵�����������������HEADʱ����ʾ���µİ汾.
-����git status�鿴һ�£������ݴ����Ǹɾ��ģ����������޸ģ�
-���ǵ���ζ������������޸���
+git reset命令既可以回退版本，也可以把暂存区的修改回退到工作区。当我们用HEAD时，表示最新的版本.
+再用git status查看一下，现在暂存区是干净的，工作区有修改：
+还记得如何丢弃工作区的修改吗？
 $ git checkout -- readme.txt
 
 
- ���ڣ������㲻���Ĵ��˶����������ݴ����ύ���˰汾�⣬��ô���أ����ǵð汾����һ����
-���Ի��˵���һ���汾�������������������ģ������㻹û�а��Լ��ı��ذ汾�����͵�Զ�̡�
-���ǵ�Git�Ƿֲ�ʽ�汾����ϵͳ�����Ǻ���ὲ��Զ�̰汾�⣬һ����ѡ�stupid boss���ύ���͵�Զ�̰汾�⣬�����Ĳ��ˡ�
+ 现在，假设你不但改错了东西，还从暂存区提交到了版本库，怎么办呢？还记得版本回退一节吗？
+可以回退到上一个版本。不过，这是有条件的，就是你还没有把自己的本地版本库推送到远程。
+还记得Git是分布式版本控制系统吗？我们后面会讲到远程版本库，一旦你把“stupid boss”提交推送到远程版本库，你就真的惨了…
 
 
-����1����������˹�����ĳ���ļ������ݣ���ֱ�Ӷ������������޸�ʱ��������git checkout -- file��
+场景1：当你改乱了工作区某个文件的内容，想直接丢弃工作区的修改时，用命令git checkout -- file。
 
-����2�����㲻�������˹�����ĳ���ļ������ݣ������ӵ����ݴ���ʱ���붪���޸ģ�����������һ��������git reset HEAD file���ͻص��˳���1���ڶ���������1������
+场景2：当你不但改乱了工作区某个文件的内容，还添加到了暂存区时，想丢弃修改，分两步，第一步用命令git reset HEAD file，就回到了场景1，第二步按场景1操作。
 
-����3���Ѿ��ύ�˲����ʵ��޸ĵ��汾��ʱ����Ҫ���������ύ���ο��汾����һ�ڣ�����ǰ����û�����͵�Զ�̿⡣
+场景3：已经提交了不合适的修改到版本库时，想要撤销本次提交，参考版本回退一节，不过前提是没有推送到远程库。
 
 
 
-һ������£���ͨ��ֱ�����ļ��������а�û�õ��ļ�ɾ�ˣ�������rm����ɾ�ˣ�
+一般情况下，你通常直接在文件管理器中把没用的文件删了，或者用rm命令删了：
 $ rm test.txt
-���ʱ��Git֪����ɾ�����ļ�����ˣ��������Ͱ汾��Ͳ�һ���ˣ�git status��������̸�������Щ�ļ���ɾ����;
-������������ѡ��һ��ȷʵҪ�Ӱ汾����ɾ�����ļ����Ǿ�������git rmɾ��������git commit��
+这个时候，Git知道你删除了文件，因此，工作区和版本库就不一致了，git status命令会立刻告诉你哪些文件被删除了;
+现在你有两个选择，一是确实要从版本库中删除该文件，那就用命令git rm删掉，并且git commit：
 
 $ git rm test.txt
 $ git commit -m "remove test.txt"
 
 
-Ҫ����һ��Զ�̿⣬ʹ������git remote add origin git@server-name:path/repo-name.git��
+要关联一个远程库，使用命令git remote add origin git@server-name:path/repo-name.git；
 
-������ʹ������git push -u origin master��һ������master��֧���������ݣ�
+关联后，使用命令git push -u origin master第一次推送master分支的所有内容；
 
-�˺�ÿ�α����ύ��ֻҪ�б�Ҫ���Ϳ���ʹ������git push origin master���������޸ģ�
+此后，每次本地提交后，只要有必要，就可以使用命令git push origin master推送最新修改；
 
 
-�ڰ汾��������Ѿ�֪����ÿ���ύ��Git�������Ǵ���һ��ʱ���ߣ�����ʱ���߾���һ����֧����ֹ��Ŀǰ��ֻ��һ��ʱ���ߣ���Git������֧������֧����master��֧��HEAD�ϸ���˵����ָ���ύ������ָ��master��master����ָ���ύ�ģ����ԣ�HEADָ��ľ��ǵ�ǰ��֧��
+在版本回退里，你已经知道，每次提交，Git都把它们串成一条时间线，这条时间线就是一个分支。截止到目前，只有一条时间线，在Git里，这个分支叫主分支，即master分支。HEAD严格来说不是指向提交，而是指向master，master才是指向提交的，所以，HEAD指向的就是当前分支。
 
-һ��ʼ��ʱ��master��֧��һ���ߣ�Git��masterָ�����µ��ύ������HEADָ��master������ȷ����ǰ��֧���Լ���ǰ��֧���ύ�㡣
+一开始的时候，master分支是一条线，Git用master指向最新的提交，再用HEAD指向master，就能确定当前分支，以及当前分支的提交点。
 
 
 <<<<<<< HEAD
@@ -293,54 +298,54 @@ Creating a new branch is quick & simple.
 Creating a new branch is quick AND simple.
 >>>>>>> feature1
 
-Git��<<<<<<<��=======��>>>>>>>��ǳ���ͬ��֧������
+Git用<<<<<<<，=======，>>>>>>>标记出不同分支的内容
 
 
-��ˣ�����Э���Ĺ���ģʽͨ����������
+因此，多人协作的工作模式通常是这样：
 
-���ȣ�������ͼ��git push origin branch-name�����Լ����޸ģ�
+首先，可以试图用git push origin branch-name推送自己的修改；
 
-�������ʧ�ܣ�����ΪԶ�̷�֧����ı��ظ��£���Ҫ����git pull��ͼ�ϲ���
+如果推送失败，则因为远程分支比你的本地更新，需要先用git pull试图合并；
 
-����ϲ��г�ͻ��������ͻ�����ڱ����ύ��
+如果合并有冲突，则解决冲突，并在本地提交；
 
-û�г�ͻ���߽������ͻ������git push origin branch-name���;��ܳɹ���
+没有冲突或者解决掉冲突后，再用git push origin branch-name推送就能成功！
 
-���git pull��ʾ��no tracking information������˵�����ط�֧��Զ�̷�֧�����ӹ�ϵû�д�����������git branch --set-upstream branch-name origin/branch-name��
+如果git pull提示“no tracking information”，则说明本地分支和远程分支的链接关系没有创建，用命令git branch --set-upstream branch-name origin/branch-name。
 
-����Ƕ���Э���Ĺ���ģʽ��һ����Ϥ�ˣ��ͷǳ��򵥡�
+这就是多人协作的工作模式，一旦熟悉了，就非常简单。
 
-С��:
+小结:
 
-�鿴Զ�̿���Ϣ��ʹ��git remote -v��
+查看远程库信息，使用git remote -v；
 
-�����½��ķ�֧��������͵�Զ�̣��������˾��ǲ��ɼ��ģ�
+本地新建的分支如果不推送到远程，对其他人就是不可见的；
 
-�ӱ������ͷ�֧��ʹ��git push origin branch-name���������ʧ�ܣ�����git pullץȡԶ�̵����ύ��
+从本地推送分支，使用git push origin branch-name，如果推送失败，先用git pull抓取远程的新提交；
 
-�ڱ��ش�����Զ�̷�֧��Ӧ�ķ�֧��ʹ��git checkout -b branch-name origin/branch-name�����غ�Զ�̷�֧���������һ�£�
+在本地创建和远程分支对应的分支，使用git checkout -b branch-name origin/branch-name，本地和远程分支的名称最好一致；
 
-�������ط�֧��Զ�̷�֧�Ĺ�����ʹ��git branch --set-upstream branch-name origin/branch-name��
+建立本地分支和远程分支的关联，使用git branch --set-upstream branch-name origin/branch-name；
 
-��Զ��ץȡ��֧��ʹ��git pull������г�ͻ��Ҫ�ȴ�����ͻ��
-
-
-����git tag <name>�����½�һ����ǩ��Ĭ��ΪHEAD��Ҳ����ָ��һ��commit id��
-
-git tag -a <tagname> -m "blablabla..."����ָ����ǩ��Ϣ��
-
-git tag -s <tagname> -m "blablabla..."������PGPǩ����ǩ��
-
-����git tag���Բ鿴���б�ǩ��
+从远程抓取分支，使用git pull，如果有冲突，要先处理冲突。
 
 
-����git push origin <tagname>��������һ�����ر�ǩ��
+命令git tag <name>用于新建一个标签，默认为HEAD，也可以指定一个commit id；
 
-����git push origin --tags��������ȫ��δ���͹��ı��ر�ǩ��
+git tag -a <tagname> -m "blablabla..."可以指定标签信息；
 
-����git tag -d <tagname>����ɾ��һ�����ر�ǩ��
+git tag -s <tagname> -m "blablabla..."可以用PGP签名标签；
 
-����git push origin :refs/tags/<tagname>����ɾ��һ��Զ�̱�ǩ��
+命令git tag可以查看所有标签。
+
+
+命令git push origin <tagname>可以推送一个本地标签；
+
+命令git push origin --tags可以推送全部未推送过的本地标签；
+
+命令git tag -d <tagname>可以删除一个本地标签；
+
+命令git push origin :refs/tags/<tagname>可以删除一个远程标签。
 
 */
 	
