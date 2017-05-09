@@ -15,6 +15,9 @@ git checkout dev
 branch test test branch
 
 
+vi mode write something to hello.txt
+
+vi222222222222222222
 
 
 haaaaaaaaallllluuuuuuuuuuuuuu;
@@ -22,6 +25,5 @@ haaaaaaaaallllluuuuuuuuuuuuuu;
 creating a new branch is quick && simple;
 
 //creating a new branch is quick and simple;
-
 
 

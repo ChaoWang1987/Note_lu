@@ -145,6 +145,8 @@ $ git branch
 
 删除分支：git branch -d <name>
 
+用git log --graph命令可以看到分支合并图
+
 
 
 
@@ -257,7 +259,13 @@ $ git commit -m "remove test.txt"
 一开始的时候，master分支是一条线，Git用master指向最新的提交，再用HEAD指向master，就能确定当前分支，以及当前分支的提交点。
 
 
+<<<<<<< HEAD
+Creating a new branch is quick & simple.
+=======
+Creating a new branch is quick AND simple.
+>>>>>>> feature1
 
+Git用<<<<<<<，=======，>>>>>>>标记出不同分支的内容
 
 
 
