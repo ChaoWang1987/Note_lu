@@ -18,6 +18,10 @@ branch test test branch
 
 
 haaaaaaaaallllluuuuuuuuuuuuuu;
+
 creating a new branch is quick && simple;
+
+//creating a new branch is quick and simple;
+
 
 
