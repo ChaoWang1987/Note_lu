@@ -2,7 +2,13 @@ hellllllllllllllllllllooooooooooooooooooooooo
 
 
 
+git checkout -b dev
+git branch
 
+
+
+git branch dev
+git checkout dev
 
 
 
