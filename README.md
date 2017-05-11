@@ -1,0 +1,435 @@
+### <center>Git基本命令</center>
+
+ 
+//在此文件夹里初始化
+> git init
+
+//第一次需要把远程仓库的项目clone到本文件夹（第二次以后用pull更新同步）
+> git clone https://github.com/jianlilu/thooo.git
+
+//将需要提交的文件添加到仓库
+> git add README.md   或  git add .
+
+//把文件提交到仓库（本地）
+> git commit -m "first commit"
+
+//本地与远程仓库建立连接
+> git remote add origin https://github.com/jianlilu/thooo.git
+
+//push 到远程仓库
+> git push -u origin master
+
+//拉取（当远程仓库和本地不一致时，先pull,再add,commit,push）
+> git pull origin master
+
+
+//安装完成后，还需要最后一步设置，在命令行输入：
+
+> $ git config --global user.name "Your Name"
+
+> $ git config --global user.email "email@example.com"
+
+//因为Git是分布式版本控制系统，所以，每个机器都必须自报家门：你的名字和Email地址。你也许会担心//，如果有人故意冒充别人怎么办？这个不必担心，
+//首先我们相信大家都是善良无知的群众，其次，真的有//冒充的也是有办法可查的。
+
+//注意git config命令的--global参数，用了这个参数，表示你这台机器上所有的Git仓库都会使用这个配置//，当然也可以对某个仓库
+//指定不同的用户名和Email地址
+
+//创建hello文件夹
+> $ mkdir hello
+
+//进入hello文件夹
+>$ cd hello
+
+//用于显示当前目录
+>$ pwd
+
+>	/c/Users/w/Desktop/note/hello
+
+//通过git init命令把这个目录变成Git可以管理的仓库：
+> $ git init	
+	
+//列出此文件夹里所有文件
+> $ ls -ah
+
+//让我们时刻掌握仓库当前的状态
+> $ git status
+
+
+//git diff顾名思义就是查看difference，显示的格式正是Unix通用的diff格式
+> $ git diff
+
+//git log命令显示从最近到最远的提交日志
+> $ git log
+
+//如果嫌输出信息太多，看得眼花缭乱的，可以试试加上--pretty=oneline参数
+> $ git log --pretty=oneline
+
+//git reflog查看命令历史，以便确定要回到未来的哪个版本。
+> $ git reflog
+
+//回退到了上个版本
+> $ git reset --hard HEAD^
+
+//（回到$ git reset --hard HEAD^之前的版本）（3628164是版本号，在GitHub中history里找到）
+> $ git reset --hard 3628164
+
+
+//修改后还没有被放到暂存区
+//git checkout -- file可以丢弃工作区的修改
+> $ git checkout -- readme.txt
+
+
+//已经git add到暂存区,庆幸的是，在commit之前，你发现了这个问题。
+//用git status查看一下，修改只是添加到了暂存区，还没有提交：
+//1、$ git reset head hello.txt (把暂存区的修改撤销掉（unstage），重新放回工作区)
+> $ git status
+> 
+> (use "git reset HEAD <file>..." to unstage)
+> 
+> $ git reset head hello.txt
+
+
+//2、$ git checkout -- hello.txt（丢弃工作区的修改）
+> $ git status
+> 
+> (use "git checkout -- <file>..." to discard changes in working directory)
+> 
+> $ git checkout -- hello.txt
+
+
+//1、rm命令删除文件
+> $ git rm test.txt
+
+//2、
+> $ git commit -m "remove test.txt"
+
+//3、push后工作区和版本库就一致了
+> $ git push origin master
+
+//创建dev分支，然后切换到dev分支：
+> $ git checkout -b dev
+
+//git checkout命令加上-b参数表示创建并切换，相当于以下两条命令
+> $ git branch dev
+> 
+> $ git checkout dev
+> 
+> Switched to branch 'dev'
+
+//用git branch命令查看当前分支(git branch命令会列出所有分支，当前分支前面会标一个*号)
+> $ git branch
+ 
+ `* dev`
+ 
+  `master`
+  
+  
+//dev分支的工作完成，我们就可以切换回master分支：  
+> $ git checkout master
+> 
+`Switched to branch 'master'`
+
+//切换回master分支后，再查看一个readme.txt文件，刚才添加的内容不见了！因为那个提交是在dev分支上，
+//而master分支此刻的提交点并没有变：
+//现在，我们把dev分支的工作成果合并到master分支上：
+//git merge命令用于合并指定分支到当前分支。
+> $ git merge dev
+
+//合并完成后，就可以放心地删除dev分支了：
+> $ git branch -d dev
+> 
+Deleted branch dev (was fec145a).
+
+//删除后，查看branch，就只剩下master分支了：
+> $ git branch
+> 
+`* master`
+
+//因为创建、合并和删除分支非常快，所以Git鼓励你使用分支完成某个任务，合并后再删掉分支，
+//这和直接在master分支上工作效果是一样的，但过程更安全。
+
+//Git鼓励大量使用分支：
+
+> 查看分支：git branch
+
+> 创建分支：git branch <name>
+
+> 切换分支：git checkout <name>
+
+> 创建+切换分支：git checkout -b <name>
+
+> 合并某分支到当前分支：git merge <name>
+
+> 删除分支：git branch -d <name>
+
+> 用git log --graph命令可以看到分支合并图
+
+//用git remote -v显示更详细的远程库的信息
+> $ git remote -v
+
+//敲命令git tag <name>就可以打一个新标签：
+> $ git tag v1.0
+
+//用命令git tag查看所有标签：
+> $ git tag
+
+//要对add merge这次提交打标签，它对应的commit id是6224937，敲入命令
+> $ git tag v0.9 6224937
+
+//用git show <tagname>查看标签信息
+> $ git show v0.9
+
+//还可以创建带有说明的标签，用-a指定标签名，-m指定说明文字：
+> $ git tag -a v0.1 -m "version 0.1 released" 3628164
+
+//用命令git show <tagname>可以看到说明文字：
+> $ git show v0.1
+
+//如果标签打错了，也可以删除：
+> $ git tag -d v0.1
+
+//因为创建的标签都只存储在本地，不会自动推送到远程。所以，打错的标签可以在本地安全删除。
+//如果要推送某个标签到远程，使用命令git push origin <tagname>：
+> $ git push origin v1.0
+
+//或者，一次性推送全部尚未推送到远程的本地标签：
+> $ git push origin --tags
+
+//如果标签已经推送到远程，要删除远程标签就麻烦一点，先从本地删除：
+> $ git tag -d v0.9
+
+//然后，从远程删除。删除命令也是push，但是格式如下：
+> $ git push origin :refs/tags/v0.9
+
+//配置别名,以后st就表示status
+> $ git config --global alias.st status
+
+//当然还有别的命令可以简写，很多人都用co表示checkout，ci表示commit，br表示branch：
+> $ git config --global alias.co checkout
+> 
+> $ git config --global alias.ci commit
+> 
+> $ git config --global alias.br branch
+
+//--global参数是全局参数，也就是这些命令在这台电脑的所有Git仓库下都有用。
+
+//甚至还有人丧心病狂地把lg配置成了：
+> git config --global alias.lg "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
+
+
+
+
+/*
+首先这里再明确一下，所有的版本控制系统，其实只能跟踪文本文件的改动，比如TXT文件，网页，所有的程序代码等等，Git也不例外。版本控制系统可以告诉你每次的改动，比如在第5行加了一个单词“Linux”，在第8行删了一个单词“Windows”。而图片、视频这些二进制文件，虽然也能由版本控制系统管理，
+但没法跟踪文件的变化，只能把二进制文件每次改动串起来，也就是只知道图片从100KB改成了120KB，但到底改了啥，版本控制系统不知道，也没法知道。
+
+不幸的是，Microsoft的Word格式是二进制格式，因此，版本控制系统是没法跟踪Word文件的改动的
+
+执行上面的命令，没有任何显示，这就对了，Unix的哲学是“没有消息就是好消息”，说明添加成功。
+
+为什么Git添加文件需要add，commit一共两步呢？因为commit可以一次提交很多文件，所以你可以多次add不同的文件
+
+
+要随时掌握工作区的状态，使用git status命令。
+如果git status告诉你有文件被修改过，用git diff可以查看修改内容。
+
+
+当然了，在实际工作中，我们脑子里怎么可能记得一个几千行的文件每次都改了什么内容，不然要版本控制系统干什么。版本控制系统肯定有某个命令
+可以告诉我们历史记录，在Git中，我们用git log命令查看;
+
+
+首先，Git必须知道当前版本是哪个版本，在Git中，用HEAD表示当前版本，也就是最新的提交3628164...882e1e0（注意我的提交ID和你的肯定不一样），
+上一个版本就是HEAD^，上上一个版本就是HEAD^^，当然往上100个版本写100个^比较容易数不过来，所以写成HEAD~100
+
+
+HEAD指向的版本就是当前版本，因此，Git允许我们在版本的历史之间穿梭，使用命令git reset --hard commit_id。
+穿梭前，用git log可以查看提交历史，以便确定要回退到哪个版本。
+要重返未来，用git reflog查看命令历史，以便确定要回到未来的哪个版本。
+
+
+工作区（Working Directory）
+就是你在电脑里能看到的目录，比如我的note文件夹就是一个工作区：
+
+版本库（Repository）
+工作区有一个隐藏目录.git，这个不算工作区，而是Git的版本库。
+
+Git的版本库里存了很多东西，其中最重要的就是称为stage（或者叫index）的暂存区，还有Git为我们自动创建的第一个分支master，以及指向master的一个指针叫HEAD。
+
+
+git add命令实际上就是把要提交的所有修改放到暂存区（Stage），然后，执行git commit就可以一次性把暂存区的所有修改提交到分支。
+一旦提交后，如果你又没有对工作区做任何修改，那么工作区就是“干净”的;
+现在版本库变成了这样，暂存区就没有任何内容了;
+
+为什么Git比其他版本控制系统设计得优秀，因为Git跟踪并管理的是修改，而非文件。
+
+现在，你又理解了Git是如何跟踪修改的，每次修改，如果不add到暂存区，那就不会加入到commit中。
+
+
+命令git checkout -- readme.txt意思就是，把readme.txt文件在工作区的修改全部撤销，这里有两种情况：
+
+一种是readme.txt自修改后还没有被放到暂存区，现在，撤销修改就回到和版本库一模一样的状态；
+
+一种是readme.txt已经添加到暂存区后，又作了修改，现在，撤销修改就回到添加到暂存区后的状态。
+
+总之，就是让这个文件回到最近一次git commit或git add时的状态。
+检出命令git checkout是git最常用的命令之一，同时也是一个很危险的命令，因为这条命令会重写工作区。
+
+
+现在假定是凌晨3点，你不但写了一些胡话，还git add到暂存区了,
+庆幸的是，在commit之前，你发现了这个问题。用git status查看一下，修改只是添加到了暂存区，还没有提交,
+Git同样告诉我们，用命令git reset HEAD file可以把暂存区的修改撤销掉（unstage），重新放回工作区.
+$ git reset HEAD readme.txt
+git reset命令既可以回退版本，也可以把暂存区的修改回退到工作区。当我们用HEAD时，表示最新的版本.
+再用git status查看一下，现在暂存区是干净的，工作区有修改：
+还记得如何丢弃工作区的修改吗？
+$ git checkout -- readme.txt
+
+
+ 现在，假设你不但改错了东西，还从暂存区提交到了版本库，怎么办呢？还记得版本回退一节吗？
+可以回退到上一个版本。不过，这是有条件的，就是你还没有把自己的本地版本库推送到远程。
+还记得Git是分布式版本控制系统吗？我们后面会讲到远程版本库，一旦你把“stupid boss”提交推送到远程版本库，你就真的惨了…
+
+
+场景1：当你改乱了工作区某个文件的内容，想直接丢弃工作区的修改时，用命令git checkout -- file。
+
+场景2：当你不但改乱了工作区某个文件的内容，还添加到了暂存区时，想丢弃修改，分两步，第一步用命令git reset HEAD file，就回到了场景1，第二步按场景1操作。
+
+场景3：已经提交了不合适的修改到版本库时，想要撤销本次提交，参考版本回退一节，不过前提是没有推送到远程库。
+
+
+
+一般情况下，你通常直接在文件管理器中把没用的文件删了，或者用rm命令删了：
+$ rm test.txt
+这个时候，Git知道你删除了文件，因此，工作区和版本库就不一致了，git status命令会立刻告诉你哪些文件被删除了;
+现在你有两个选择，一是确实要从版本库中删除该文件，那就用命令git rm删掉，并且git commit：
+
+$ git rm test.txt
+$ git commit -m "remove test.txt"
+
+
+要关联一个远程库，使用命令git remote add origin git@server-name:path/repo-name.git；
+
+关联后，使用命令git push -u origin master第一次推送master分支的所有内容；
+
+此后，每次本地提交后，只要有必要，就可以使用命令git push origin master推送最新修改；
+
+
+在版本回退里，你已经知道，每次提交，Git都把它们串成一条时间线，这条时间线就是一个分支。截止到目前，只有一条时间线，在Git里，这个分支叫主分支，即master分支。HEAD严格来说不是指向提交，而是指向master，master才是指向提交的，所以，HEAD指向的就是当前分支。
+
+一开始的时候，master分支是一条线，Git用master指向最新的提交，再用HEAD指向master，就能确定当前分支，以及当前分支的提交点。
+
+
+
+` <<<<<<< HEAD `
+
+` Creating a new branch is quick & simple. `
+
+` ======= `
+
+` Creating a new branch is quick AND simple. `
+
+` >>>>>>> feature1 `
+
+Git用<<<<<<<，=======，>>>>>>>标记出不同分支的内容
+
+
+因此，多人协作的工作模式通常是这样：
+
+首先，可以试图用git push origin branch-name推送自己的修改；
+
+如果推送失败，则因为远程分支比你的本地更新，需要先用git pull试图合并；
+
+如果合并有冲突，则解决冲突，并在本地提交；
+
+没有冲突或者解决掉冲突后，再用git push origin branch-name推送就能成功！
+
+如果git pull提示“no tracking information”，则说明本地分支和远程分支的链接关系没有创建，用命令git branch --set-upstream branch-name origin/branch-name。
+
+这就是多人协作的工作模式，一旦熟悉了，就非常简单。
+
+小结:
+
+查看远程库信息，使用git remote -v；
+
+本地新建的分支如果不推送到远程，对其他人就是不可见的；
+
+从本地推送分支，使用git push origin branch-name，如果推送失败，先用git pull抓取远程的新提交；
+
+在本地创建和远程分支对应的分支，使用git checkout -b branch-name origin/branch-name，本地和远程分支的名称最好一致；
+
+建立本地分支和远程分支的关联，使用git branch --set-upstream branch-name origin/branch-name；
+
+从远程抓取分支，使用git pull，如果有冲突，要先处理冲突。
+
+
+命令git tag <name>用于新建一个标签，默认为HEAD，也可以指定一个commit id；
+
+git tag -a <tagname> -m "blablabla..."可以指定标签信息；
+
+git tag -s <tagname> -m "blablabla..."可以用PGP签名标签；
+
+命令git tag可以查看所有标签。
+
+
+命令git push origin <tagname>可以推送一个本地标签；
+
+命令git push origin --tags可以推送全部未推送过的本地标签；
+
+命令git tag -d <tagname>可以删除一个本地标签；
+
+命令git push origin :refs/tags/<tagname>可以删除一个远程标签。
+
+*/
+	
+
+
+分支管理
+
+主分支:	master
+
+创建分支
+$ git checkout -b <name>
+	-b 创建并切换分支等于一下两条命令
+		$ git branch <name>		创建分支<name>
+		$ git checkout <name>	切换到<name>分支
+
+查看分支
+$ git branch
+
+合并指定分支到当前分支
+$ git merge <name>
+	--no-ff		用普通模式合并，产生一个新的 merge commit.
+				默认使用 Fast forward 模式没有 merge commit.
+
+删除分支
+$ git branch -d <name>
+	-d	删除合并后的分支
+	-D	强制删除分支
+
+暂存当前正在进行的工作
+$ git stash
+
+查看已暂存的工作
+$ git stash list
+
+恢复暂存的工作同时把暂存内容删除
+$ git stash pop
+	恢复暂存的工作
+	$ git stash apply stash@{0}
+	将暂存内容删除
+	$ git stash drop stash@{0}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
