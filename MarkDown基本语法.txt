@@ -50,6 +50,35 @@
 	阅读模式 Ctrl + Alt + M
 
 	全屏 F11
+	
+	
+	
+---------- :（ctrl + r）
+——  :(ctrl + -)（中文输入法状态）
+
+**Cmd Markdown** : (ctrl + b)
+
+
+> * 整理知识，学习笔记
+> * 发布日记，杂文，所见所想
+> * 撰写发布技术文稿（代码支持）
+> * 撰写发布学术论文（LaTeX 公式支持）
+
+ - (ctrl + u)
+
+> (ctrl + q)
+
+ 1. (ctrl + o)
+ 2. (ctrl + o)
+
+![cmd-markdown-logo](https://www.zybuluo.com/static/img/logo.png) : (ctrl + g)
+
+ *斜体* ：（ctrl + i）
+ **粗体** :(ctrl + b)
+
+[链接](http://www.baidu.com):(ctrl + L)
+
+	
 
 
 # 一级标题
