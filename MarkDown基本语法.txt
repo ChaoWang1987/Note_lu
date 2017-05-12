@@ -1,4 +1,4 @@
-
+﻿
 ### <center>Markdown基本语法</center>
 
 
@@ -11,6 +11,45 @@
     标题 1, 2, 3 (Ctrl + 1, Ctrl + 2, Ctrl + 3)
     
     列表 (Ctrl + U and Ctrl + Shift + O)
+
+
+快捷键：
+
+	段落引用 > Ctrl + Q
+
+	新的段落--- Ctrl + R
+
+	列表项 - Ctrl + U
+
+	有序列表项 1. 2. Ctrl + O
+
+	斜体文本CONTENT Ctrl + I
+
+	插入粗体 Ctrl + B
+
+	删除当前行 Ctrl + D
+
+	搜索 Ctrl + F
+
+	搜索文档 Ctrl + Alt + F
+
+	插入图像 Ctrl + G
+
+	插入标题 Ctrl + H
+
+	插入代码 Ctrl + K
+
+	插入超链接 Ctrl + L
+
+	創建新文稿 Ctrl + Alt + N
+
+	主題切换 Ctrl + Alt + J
+
+	编辑模式 Ctrl + M
+
+	阅读模式 Ctrl + Alt + M
+
+	全屏 F11
 
 
 # 一级标题
